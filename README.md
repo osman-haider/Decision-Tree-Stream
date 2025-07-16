@@ -1,8 +1,6 @@
-# Decision-Tree-Stream
-
 # Decision Stream: Deep, Merging Decision Trees for Classification and Regression
 
-![Decision Stream vs Decision Tree](https://user-images.githubusercontent.com/your_image_path/decision_stream_fig.png)
+![Decision Stream vs Decision Tree](https://github.com/osman-haider/Decision-Tree-Stream/blob/master/images/dt_stream.png)
 <!-- Replace the above with the raw link to the image you took from the paper and uploaded to your GitHub or an image host. -->
 
 ---
@@ -27,11 +25,11 @@
 
 ## Overview
 
-**Decision Stream** is an advanced machine learning algorithm inspired by [this research paper](https://arxiv.org/abs/1704.07657) that improves on classical decision trees by introducing *statistical merging* of similar nodes.  
+**Decision Stream** is an advanced machine learning algorithm inspired by [this research paper](https://arxiv.org/pdf/1704.07657v3) that improves on classical decision trees by introducing *statistical merging* of similar nodes.  
 This creates a **deep, directed acyclic graph (DAG)** structure instead of a rigid tree, resulting in models that are more robust, less prone to overfitting, and perform better on complex, real-world datasets.
 
 > **📰 Full Medium Article:**  
-> [A Practical Guide to Decision Stream for Classification and Regression](https://medium.com/your-article-link)
+> [A Practical Guide to Decision Stream for Classification and Regression](https://usman-haider.medium.com/beyond-decision-trees-a-practical-guide-to-decision-stream-for-classification-and-regression-with-4b2c8c6c4102)
 
 ---
 
@@ -73,20 +71,23 @@ This creates a **deep, directed acyclic graph (DAG)** structure instead of a rig
 Clone this repository and install dependencies:
 
 ```bash
-git clone https://github.com/your-github-link.git
-cd your-github-link
+git clone https://github.com/osman-haider/Decision-Tree-Stream
+cd Decision-Tree-Stream
 pip install -r requirements.txt
+```
+
 Dependencies:
+- numpy
+- scipy
+- scikit-learn
 
-numpy
+---
 
-scipy
+## Usage
 
-scikit-learn
+### **1. Classification Example (MNIST)**
 
-Usage
-1. Classification Example (MNIST)
-
+```python
 from src.main.Decision_Stream import DecisionStream
 from sklearn.datasets import fetch_openml
 from sklearn.model_selection import train_test_split
@@ -101,11 +102,19 @@ ds_clf = DecisionStream(plim=0.005, max_depth=10, min_samples_split=30, task='cl
 ds_clf.fit(X_train, y_train)
 y_pred = ds_clf.predict(X_test)
 print("MNIST (Subset) Classification Accuracy:", accuracy_score(y_test, y_pred))
+```
+
 Or use our example script:
 
+```bash
 python src/main/classification.py
-2. Regression Example (California Housing)
+```
 
+---
+
+### **2. Regression Example (California Housing)**
+
+```python
 from src.main.Decision_Stream import DecisionStream
 from sklearn.datasets import fetch_california_housing
 from sklearn.model_selection import train_test_split
@@ -118,11 +127,19 @@ ds_reg = DecisionStream(plim=0.01, max_depth=12, min_samples_split=20, task='reg
 ds_reg.fit(X_train, y_train)
 y_pred = ds_reg.predict(X_test)
 print("California Housing Regression MSE:", mean_squared_error(y_test, y_pred))
+```
+
 Or run:
 
+```bash
 python src/main/regression.py
-Directory Structure
+```
 
+---
+
+## Directory Structure
+
+```
 src/
   main/
     Decision_Stream.py       # Core Decision Stream class
@@ -130,52 +147,49 @@ src/
     regression.py            # California housing regression example
 README.md
 requirements.txt
-Logging
-This implementation uses Python's logging library. By default, all major events (splits, merges, terminal nodes) are logged to the console.
-You can adjust the verbosity by editing logger.setLevel(logging.INFO) or logger.setLevel(logging.DEBUG) in Decision_Stream.py.
+```
+
+---
+
+## Logging
+
+This implementation uses Python's `logging` library. By default, all major events (splits, merges, terminal nodes) are logged to the console.  
+You can adjust the verbosity by editing `logger.setLevel(logging.INFO)` or `logger.setLevel(logging.DEBUG)` in `Decision_Stream.py`.
 
 To log to a file instead, add these lines to your logger setup:
 
+```python
 fh = logging.FileHandler('decision_stream.log')
 fh.setFormatter(formatter)
 logger.addHandler(fh)
-References
-Original Paper:
-Decision Stream: Cultivating Deep Decision Trees (arXiv)
+```
 
-Project Article:
-A Practical Guide to Decision Stream for Classification and Regression (Medium)
+---
 
-Related Libraries:
+## References
 
-scikit-learn
+- **Original Paper:**  
+  [Decision Stream: Cultivating Deep Decision Trees (arXiv)](https://arxiv.org/pdf/1704.07657v3)
+- **Project Article:**  
+  [A Practical Guide to Decision Stream for Classification and Regression (Medium)](https://usman-haider.medium.com/beyond-decision-trees-a-practical-guide-to-decision-stream-for-classification-and-regression-with-4b2c8c6c4102)
+- **Related Libraries:**  
+  - [scikit-learn](https://scikit-learn.org/)
+  - [numpy](https://numpy.org/)
+  - [scipy](https://scipy.org/)
 
-numpy
+---
 
-scipy
+## Further Reading
 
-Further Reading
-Decision Trees Explained (scikit-learn docs)
+- [Decision Trees Explained (scikit-learn docs)](https://scikit-learn.org/stable/modules/tree.html)
+- [Boosting and Bagging Decision Trees](https://scikit-learn.org/stable/modules/ensemble.html)
 
-Boosting and Bagging Decision Trees
+---
 
-License
+## License
+
 This project is licensed under the MIT License.
 
-If you find this repo useful, please ⭐️ it and share! Contributions and suggestions are welcome.
-
 ---
 
-## **How to get a download link for this file**
-
-1. **Manual way**:  
-   - Copy the above contents into a file called `README.md` in your repo root.
-   - [Optional] Upload your image to GitHub and replace the image URL at the top.
-2. **Gist (quick download link):**  
-   - Go to https://gist.github.com/
-   - Paste the above into a new gist, name it `README.md`.
-   - After saving, click "Raw" on the file for a direct download link.
-3. **If you want me to generate a downloadable file here**:  
-   - Let me know, and I'll create and upload it directly for you.
-
----
+**If you find this repo useful, please ⭐️ it and share! Contributions and suggestions are welcome.**
